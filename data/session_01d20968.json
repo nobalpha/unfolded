@@ -1,0 +1,22 @@
+{
+  "session_id": "01d20968",
+  "subject_name": "Roni",
+  "collected_stories": {
+    "early_life": [
+      {
+        "question": "Where and when were you born?",
+        "answer": "Vartanin aminda",
+        "timestamp": "2026-02-18T17:11:15.499253"
+      },
+      {
+        "question": "What is your earliest memory?",
+        "answer": "end",
+        "timestamp": "2026-02-18T17:11:21.483010"
+      }
+    ]
+  },
+  "current_category_index": 0,
+  "current_question_index": 2,
+  "created_at": "2026-02-18T17:11:07.076811",
+  "progress": 6
+}

@@ -1,0 +1,34 @@
+{
+  "session_id": "95d60b2b",
+  "subject_name": "Roni",
+  "collected_stories": {
+    "early_life": [
+      {
+        "question": "Where and when were you born?",
+        "answer": "Istanbul",
+        "timestamp": "2026-02-18T15:27:23.008439"
+      },
+      {
+        "question": "What is your earliest memory?",
+        "answer": "I don't know",
+        "timestamp": "2026-02-18T15:27:27.703413"
+      },
+      {
+        "question": "Tell me about the home where you grew up.",
+        "answer": "I love my home, adorable",
+        "timestamp": "2026-02-18T15:27:39.685453"
+      }
+    ],
+    "legacy": [
+      {
+        "question": "What are you most grateful for?",
+        "answer": "my family",
+        "timestamp": "2026-02-18T15:27:52.071083"
+      }
+    ]
+  },
+  "current_category_index": 7,
+  "current_question_index": 1,
+  "created_at": "2026-02-18T15:27:15.371173",
+  "progress": 12
+}

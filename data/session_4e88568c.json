@@ -1,0 +1,17 @@
+{
+  "session_id": "4e88568c",
+  "subject_name": "test",
+  "collected_stories": {
+    "early_life": [
+      {
+        "question": "Where and when were you born?",
+        "answer": "enough pass to bio",
+        "timestamp": "2026-02-18T15:33:06.929240"
+      }
+    ]
+  },
+  "current_category_index": 0,
+  "current_question_index": 1,
+  "created_at": "2026-02-18T15:32:37.290302",
+  "progress": 3
+}

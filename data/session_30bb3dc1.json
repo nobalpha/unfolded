@@ -1,0 +1,17 @@
+{
+  "session_id": "30bb3dc1",
+  "subject_name": "dsf",
+  "collected_stories": {
+    "early_life": [
+      {
+        "question": "Where and when were you born?",
+        "answer": "sdqfqsdf",
+        "timestamp": "2026-03-21T13:13:43.088018"
+      }
+    ]
+  },
+  "current_category_index": 0,
+  "current_question_index": 1,
+  "created_at": "2026-03-21T13:13:39.563701",
+  "progress": 3
+}

@@ -1,0 +1,17 @@
+# Biography Generator Backend - Requirements
+
+# Web Framework
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+
+# WebSocket support
+websockets>=12.0
+
+# Google Gemini AI
+google-genai
+
+# Document Generation
+python-docx
+
+# Utilities
+pydantic>=2.0

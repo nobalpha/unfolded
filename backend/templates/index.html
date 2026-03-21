@@ -1,0 +1,1347 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Unfolded - Your Life Story</title>
+
+        <!-- Vue 3 -->
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- Feather Icons -->
+        <script src="https://unpkg.com/feather-icons"></script>
+
+        <style>
+            :root {
+                --primary: #1a1a2e;
+                --secondary: #16213e;
+                --accent: #e94560;
+                --accent-soft: #ff6b6b;
+                --gold: #c9a959;
+                --cream: #faf8f5;
+                --text: #2d2d2d;
+                --text-light: #6b6b6b;
+                --border: #e8e4df;
+                --shadow: rgba(0, 0, 0, 0.08);
+                --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                --gradient-warm: linear-gradient(
+                    135deg,
+                    #f093fb 0%,
+                    #f5576c 100%
+                );
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family:
+                    "Inter",
+                    -apple-system,
+                    BlinkMacSystemFont,
+                    sans-serif;
+                background: var(--cream);
+                color: var(--text);
+                min-height: 100vh;
+            }
+
+            /* Elegant Background Pattern */
+            .app-container {
+                min-height: 100vh;
+                background:
+                    radial-gradient(
+                        ellipse at top left,
+                        rgba(201, 169, 89, 0.05) 0%,
+                        transparent 50%
+                    ),
+                    radial-gradient(
+                        ellipse at bottom right,
+                        rgba(233, 69, 96, 0.05) 0%,
+                        transparent 50%
+                    ),
+                    var(--cream);
+            }
+
+            /* Landing Page */
+            .landing {
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 2rem;
+                text-align: center;
+            }
+
+            .landing-logo {
+                font-family: "Playfair Display", Georgia, serif;
+                font-size: 4rem;
+                font-weight: 600;
+                background: var(--gradient);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                margin-bottom: 0.5rem;
+                letter-spacing: -0.02em;
+            }
+
+            .landing-tagline {
+                font-size: 1.25rem;
+                color: var(--text-light);
+                margin-bottom: 3rem;
+                font-weight: 300;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+            }
+
+            .landing-card {
+                background: white;
+                padding: 3rem;
+                border-radius: 24px;
+                box-shadow: 0 25px 80px var(--shadow);
+                max-width: 480px;
+                width: 100%;
+            }
+
+            .landing-title {
+                font-family: "Playfair Display", Georgia, serif;
+                font-size: 1.75rem;
+                margin-bottom: 0.5rem;
+                color: var(--primary);
+            }
+
+            .landing-subtitle {
+                color: var(--text-light);
+                margin-bottom: 2rem;
+                line-height: 1.6;
+            }
+
+            .input-group {
+                margin-bottom: 1.5rem;
+            }
+
+            .input-label {
+                display: block;
+                font-size: 0.875rem;
+                font-weight: 500;
+                color: var(--text);
+                margin-bottom: 0.5rem;
+                text-align: left;
+            }
+
+            .input-field {
+                width: 100%;
+                padding: 1rem 1.25rem;
+                font-size: 1rem;
+                border: 2px solid var(--border);
+                border-radius: 12px;
+                background: var(--cream);
+                transition: all 0.3s ease;
+                font-family: inherit;
+            }
+
+            .input-field:focus {
+                outline: none;
+                border-color: var(--accent);
+                background: white;
+                box-shadow: 0 0 0 4px rgba(233, 69, 96, 0.1);
+            }
+
+            .btn {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.5rem;
+                padding: 1rem 2rem;
+                font-size: 1rem;
+                font-weight: 500;
+                border: none;
+                border-radius: 12px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                font-family: inherit;
+            }
+
+            .btn-primary {
+                background: var(--gradient);
+                color: white;
+                width: 100%;
+            }
+
+            .btn-primary:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
+            }
+
+            .btn-secondary {
+                background: white;
+                color: var(--text);
+                border: 2px solid var(--border);
+            }
+
+            .btn-secondary:hover {
+                border-color: var(--accent);
+                color: var(--accent);
+            }
+
+            .btn-icon {
+                width: 48px;
+                height: 48px;
+                padding: 0;
+                border-radius: 50%;
+            }
+
+            /* Chat Interface */
+            .chat-container {
+                display: flex;
+                height: 100vh;
+            }
+
+            /* Sidebar */
+            .sidebar {
+                width: 320px;
+                background: white;
+                border-right: 1px solid var(--border);
+                display: flex;
+                flex-direction: column;
+                flex-shrink: 0;
+            }
+
+            .sidebar-header {
+                padding: 1.5rem;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .sidebar-logo {
+                font-family: "Playfair Display", Georgia, serif;
+                font-size: 1.5rem;
+                font-weight: 600;
+                background: var(--gradient);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+
+            .sidebar-user {
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+                margin-top: 1rem;
+                padding: 0.75rem;
+                background: var(--cream);
+                border-radius: 12px;
+            }
+
+            .user-avatar {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background: var(--gradient);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-weight: 600;
+            }
+
+            .user-name {
+                font-weight: 500;
+            }
+
+            .user-status {
+                font-size: 0.75rem;
+                color: var(--text-light);
+            }
+
+            /* Progress Section */
+            .progress-section {
+                padding: 1.5rem;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .progress-title {
+                font-size: 0.75rem;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+                color: var(--text-light);
+                margin-bottom: 1rem;
+            }
+
+            .progress-bar-container {
+                background: var(--cream);
+                border-radius: 100px;
+                height: 8px;
+                overflow: hidden;
+                margin-bottom: 0.5rem;
+            }
+
+            .progress-bar {
+                height: 100%;
+                background: var(--gradient);
+                border-radius: 100px;
+                transition: width 0.5s ease;
+            }
+
+            .progress-text {
+                font-size: 0.875rem;
+                color: var(--text-light);
+            }
+
+            /* Chapters List */
+            .chapters-list {
+                flex: 1;
+                overflow-y: auto;
+                padding: 1rem;
+            }
+
+            .chapter-item {
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+                padding: 0.875rem 1rem;
+                border-radius: 12px;
+                margin-bottom: 0.5rem;
+                cursor: pointer;
+                transition: all 0.2s ease;
+            }
+
+            .chapter-item:hover {
+                background: var(--cream);
+            }
+
+            .chapter-item.active {
+                background: var(--cream);
+                border-left: 3px solid var(--accent);
+            }
+
+            .chapter-item.completed {
+                opacity: 0.6;
+            }
+
+            .chapter-icon {
+                font-size: 1.25rem;
+            }
+
+            .chapter-title {
+                font-size: 0.875rem;
+                font-weight: 500;
+            }
+
+            .chapter-questions {
+                font-size: 0.75rem;
+                color: var(--text-light);
+            }
+
+            .chapter-check {
+                margin-left: auto;
+                color: #10b981;
+            }
+
+            /* Main Chat Area */
+            .chat-main {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                background: var(--cream);
+            }
+
+            .chat-header {
+                padding: 1.25rem 2rem;
+                background: white;
+                border-bottom: 1px solid var(--border);
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .chat-header-title {
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+            }
+
+            .chat-header-icon {
+                font-size: 1.5rem;
+            }
+
+            .chat-header-text h2 {
+                font-family: "Playfair Display", Georgia, serif;
+                font-size: 1.25rem;
+                font-weight: 600;
+            }
+
+            .chat-header-text span {
+                font-size: 0.875rem;
+                color: var(--text-light);
+            }
+
+            /* Messages Area */
+            .messages-container {
+                flex: 1;
+                overflow-y: auto;
+                padding: 2rem;
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .message {
+                display: flex;
+                gap: 1rem;
+                max-width: 75%;
+                animation: fadeIn 0.3s ease;
+            }
+
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            .message.bot {
+                align-self: flex-start;
+            }
+
+            .message.user {
+                align-self: flex-end;
+                flex-direction: row-reverse;
+            }
+
+            .message-avatar {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+            }
+
+            .message.bot .message-avatar {
+                background: var(--gradient);
+                color: white;
+            }
+
+            .message.user .message-avatar {
+                background: var(--gold);
+                color: white;
+            }
+
+            .message-content {
+                background: white;
+                padding: 1.25rem 1.5rem;
+                border-radius: 20px;
+                box-shadow: 0 2px 12px var(--shadow);
+                line-height: 1.6;
+            }
+
+            .message.user .message-content {
+                background: var(--gradient);
+                color: white;
+            }
+
+            .message-time {
+                font-size: 0.75rem;
+                color: var(--text-light);
+                margin-top: 0.5rem;
+            }
+
+            .typing-indicator {
+                display: flex;
+                gap: 0.25rem;
+                padding: 1rem 1.5rem;
+                background: white;
+                border-radius: 20px;
+                width: fit-content;
+            }
+
+            .typing-dot {
+                width: 8px;
+                height: 8px;
+                background: var(--text-light);
+                border-radius: 50%;
+                animation: typing 1.4s infinite;
+            }
+
+            .typing-dot:nth-child(2) {
+                animation-delay: 0.2s;
+            }
+            .typing-dot:nth-child(3) {
+                animation-delay: 0.4s;
+            }
+
+            @keyframes typing {
+                0%,
+                60%,
+                100% {
+                    transform: translateY(0);
+                }
+                30% {
+                    transform: translateY(-4px);
+                }
+            }
+
+            /* Chat Input */
+            .chat-input-container {
+                padding: 1.5rem 2rem;
+                background: white;
+                border-top: 1px solid var(--border);
+            }
+
+            .chat-input-wrapper {
+                display: flex;
+                gap: 1rem;
+                align-items: flex-end;
+            }
+
+            .chat-input {
+                flex: 1;
+                padding: 1rem 1.25rem;
+                font-size: 1rem;
+                border: 2px solid var(--border);
+                border-radius: 16px;
+                background: var(--cream);
+                resize: none;
+                min-height: 52px;
+                max-height: 150px;
+                font-family: inherit;
+                line-height: 1.5;
+            }
+
+            .chat-input:focus {
+                outline: none;
+                border-color: var(--accent);
+                background: white;
+            }
+
+            .chat-actions {
+                display: flex;
+                gap: 0.5rem;
+            }
+
+            .btn-voice {
+                background: var(--cream);
+                color: var(--text);
+            }
+
+            .btn-voice.recording {
+                background: var(--accent);
+                color: white;
+                animation: pulse 1s infinite;
+            }
+
+            @keyframes pulse {
+                0%,
+                100% {
+                    transform: scale(1);
+                }
+                50% {
+                    transform: scale(1.05);
+                }
+            }
+
+            .btn-send {
+                background: var(--gradient);
+                color: white;
+            }
+
+            .btn-send:disabled {
+                opacity: 0.5;
+                cursor: not-allowed;
+            }
+
+            /* Biography Preview */
+            .biography-section {
+                padding: 2rem;
+                background: white;
+                margin: 1rem;
+                border-radius: 20px;
+                max-height: 400px;
+                overflow-y: auto;
+            }
+
+            .biography-section h3 {
+                font-family: "Playfair Display", Georgia, serif;
+                margin-bottom: 1rem;
+            }
+
+            .biography-content {
+                white-space: pre-wrap;
+                line-height: 1.8;
+                font-size: 0.95rem;
+            }
+
+            /* Complete Screen */
+            .complete-screen {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 3rem;
+                text-align: center;
+                flex: 1;
+            }
+
+            .complete-icon {
+                font-size: 4rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .complete-title {
+                font-family: "Playfair Display", Georgia, serif;
+                font-size: 2rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .complete-subtitle {
+                color: var(--text-light);
+                margin-bottom: 2rem;
+                max-width: 400px;
+            }
+
+            .download-buttons {
+                display: flex;
+                gap: 1rem;
+                margin-bottom: 2rem;
+            }
+
+            /* Responsive */
+            @media (max-width: 768px) {
+                .sidebar {
+                    display: none;
+                }
+
+                .chat-container {
+                    flex-direction: column;
+                }
+
+                .landing-logo {
+                    font-size: 2.5rem;
+                }
+
+                .landing-card {
+                    padding: 2rem;
+                }
+            }
+
+            /* Scrollbar Styling */
+            ::-webkit-scrollbar {
+                width: 6px;
+            }
+
+            ::-webkit-scrollbar-track {
+                background: transparent;
+            }
+
+            ::-webkit-scrollbar-thumb {
+                background: var(--border);
+                border-radius: 3px;
+            }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: var(--text-light);
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <div class="app-container">
+                <!-- Landing Page -->
+                <div v-if="!session" class="landing">
+                    <h1 class="landing-logo">Unfolded</h1>
+                    <p class="landing-tagline">
+                        Your Life Story, Beautifully Told
+                    </p>
+
+                    <div class="landing-card">
+                        <h2 class="landing-title">Begin Your Story</h2>
+                        <p class="landing-subtitle">
+                            Through a gentle conversation, we'll help you
+                            capture the moments, memories, and wisdom that make
+                            your life unique.
+                        </p>
+
+                        <div class="input-group">
+                            <label class="input-label">What's your name?</label>
+                            <input
+                                v-model="userName"
+                                type="text"
+                                class="input-field"
+                                placeholder="Enter your name"
+                                @keyup.enter="startSession"
+                            />
+                        </div>
+
+                        <button
+                            @click="startSession"
+                            class="btn btn-primary"
+                            :disabled="!userName.trim()"
+                        >
+                            <span>Start My Journey</span>
+                            <svg
+                                width="20"
+                                height="20"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                            >
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Chat Interface -->
+                <div v-else class="chat-container">
+                    <!-- Sidebar -->
+                    <aside class="sidebar">
+                        <div class="sidebar-header">
+                            <div class="sidebar-logo">Unfolded</div>
+                            <div class="sidebar-user">
+                                <div class="user-avatar">
+                                    [[
+                                    session.subject_name.charAt(0).toUpperCase()
+                                    ]]
+                                </div>
+                                <div>
+                                    <div class="user-name">
+                                        [[ session.subject_name ]]
+                                    </div>
+                                    <div class="user-status">
+                                        Telling their story
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="progress-section">
+                            <div class="progress-title">Your Progress</div>
+                            <div class="progress-bar-container">
+                                <div
+                                    class="progress-bar"
+                                    :style="{ width: progress + '%' }"
+                                ></div>
+                            </div>
+                            <div class="progress-text">
+                                [[ progress ]]% Complete
+                            </div>
+                        </div>
+
+                        <div class="chapters-list">
+                            <div
+                                v-for="(cat, id) in categories"
+                                :key="id"
+                                class="chapter-item"
+                                :class="{ 
+                                active: currentQuestion?.category === id,
+                                completed: isChapterComplete(id)
+                            }"
+                            >
+                                <span class="chapter-icon">[[ cat.icon ]]</span>
+                                <div>
+                                    <div class="chapter-title">
+                                        [[ cat.title ]]
+                                    </div>
+                                    <div class="chapter-questions">
+                                        [[ cat.question_count ]] questions
+                                    </div>
+                                </div>
+                                <span
+                                    v-if="isChapterComplete(id)"
+                                    class="chapter-check"
+                                    >✓</span
+                                >
+                            </div>
+                        </div>
+                    </aside>
+
+                    <!-- Main Chat -->
+                    <main class="chat-main">
+                        <template v-if="!isComplete">
+                            <header class="chat-header">
+                                <div class="chat-header-title">
+                                    <span class="chat-header-icon"
+                                        >[[ currentQuestion?.category_icon ||
+                                        '📖' ]]</span
+                                    >
+                                    <div class="chat-header-text">
+                                        <h2>
+                                            [[ currentQuestion?.category_title
+                                            || 'Interview' ]]
+                                        </h2>
+                                        <span
+                                            >Question [[
+                                            (currentQuestion?.question_index ||
+                                            0) + 1 ]] of [[
+                                            currentQuestion?.total_questions ||
+                                            0 ]]</span
+                                        >
+                                    </div>
+                                </div>
+                                <button
+                                    @click="skipQuestion"
+                                    class="btn btn-secondary"
+                                    style="
+                                        padding: 0.5rem 1rem;
+                                        font-size: 0.875rem;
+                                    "
+                                >
+                                    Skip Question
+                                </button>
+                            </header>
+
+                            <div
+                                class="messages-container"
+                                ref="messagesContainer"
+                            >
+                                <div
+                                    v-for="(msg, index) in messages"
+                                    :key="index"
+                                    class="message"
+                                    :class="msg.type"
+                                >
+                                    <div class="message-avatar">
+                                        <template v-if="msg.type === 'bot'"
+                                            >📖</template
+                                        >
+                                        <template v-else
+                                            >[[ session.subject_name.charAt(0)
+                                            ]]</template
+                                        >
+                                    </div>
+                                    <div>
+                                        <div class="message-content">
+                                            [[ msg.text ]]
+                                        </div>
+                                        <div class="message-time">
+                                            [[ msg.time ]]
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div v-if="isTyping" class="message bot">
+                                    <div class="message-avatar">📖</div>
+                                    <div class="typing-indicator">
+                                        <span class="typing-dot"></span>
+                                        <span class="typing-dot"></span>
+                                        <span class="typing-dot"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="chat-input-container">
+                                <div class="chat-input-wrapper">
+                                    <textarea
+                                        v-model="inputMessage"
+                                        class="chat-input"
+                                        placeholder="Share your story..."
+                                        @keydown.enter.exact.prevent="sendMessage"
+                                        rows="1"
+                                        ref="chatInput"
+                                    ></textarea>
+                                    <div class="chat-actions">
+                                        <button
+                                            @click="toggleVoice"
+                                            class="btn btn-icon btn-voice"
+                                            :class="{ recording: isRecording }"
+                                            :title="isRecording ? 'Stop Recording' : 'Start Voice Input'"
+                                        >
+                                            <svg
+                                                width="20"
+                                                height="20"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                            >
+                                                <path
+                                                    d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"
+                                                />
+                                                <path
+                                                    d="M19 10v2a7 7 0 0 1-14 0v-2"
+                                                />
+                                                <line
+                                                    x1="12"
+                                                    y1="19"
+                                                    x2="12"
+                                                    y2="23"
+                                                />
+                                                <line
+                                                    x1="8"
+                                                    y1="23"
+                                                    x2="16"
+                                                    y2="23"
+                                                />
+                                            </svg>
+                                        </button>
+                                        <button
+                                            @click="sendMessage"
+                                            class="btn btn-icon btn-send"
+                                            :disabled="!inputMessage.trim()"
+                                        >
+                                            <svg
+                                                width="20"
+                                                height="20"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                            >
+                                                <line
+                                                    x1="22"
+                                                    y1="2"
+                                                    x2="11"
+                                                    y2="13"
+                                                />
+                                                <polygon
+                                                    points="22 2 15 22 11 13 2 9 22 2"
+                                                />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+
+                        <!-- Complete Screen -->
+                        <div v-else class="complete-screen">
+                            <div class="complete-icon">✨</div>
+                            <h2 class="complete-title">
+                                Your Story is Complete!
+                            </h2>
+                            <p class="complete-subtitle">
+                                Thank you for sharing your incredible journey.
+                                Your biography has been crafted with care and is
+                                ready to download.
+                            </p>
+
+                            <div class="download-buttons">
+                                <button
+                                    @click="generateBiography"
+                                    class="btn btn-primary"
+                                    :disabled="isGenerating"
+                                >
+                                    <span v-if="isGenerating"
+                                        >Generating...</span
+                                    >
+                                    <span v-else>Generate Biography</span>
+                                </button>
+                            </div>
+
+                            <div
+                                v-if="biographyGenerated"
+                                class="download-buttons"
+                            >
+                                <button
+                                    @click="downloadBiography('docx')"
+                                    class="btn btn-secondary"
+                                >
+                                    📄 Download Word
+                                </button>
+                                <button
+                                    @click="downloadBiography('txt')"
+                                    class="btn btn-secondary"
+                                >
+                                    📝 Download Text
+                                </button>
+                            </div>
+
+                            <div
+                                v-if="biographyPreview"
+                                class="biography-section"
+                            >
+                                <h3>Preview</h3>
+                                <div class="biography-content">
+                                    [[ biographyPreview ]]
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            const { createApp, ref, computed, watch, nextTick, onMounted } =
+                Vue;
+
+            // Auto-detect API URL for deployment
+            const getApiUrl = () => {
+                // Check if running on localhost
+                if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                    return 'http://localhost:8000';
+                }
+                // For deployed version, use same host
+                return window.location.origin;
+            };
+            const API_URL = getApiUrl();
+            const WS_URL = API_URL.replace('http', 'ws');
+
+            createApp({
+                delimiters: ['[[', ']]'],
+                setup() {
+                    // State
+                    const userName = ref("");
+                    const session = ref(null);
+                    const messages = ref([]);
+                    const inputMessage = ref("");
+                    const isTyping = ref(false);
+                    const isRecording = ref(false);
+                    const progress = ref(0);
+                    const currentQuestion = ref(null);
+                    const isComplete = ref(false);
+                    const isGenerating = ref(false);
+                    const biographyGenerated = ref(false);
+                    const biographyPreview = ref("");
+                    const messagesContainer = ref(null);
+                    const chatInput = ref(null);
+
+                    const categories = ref({
+                        early_life: {
+                            title: "Early Life",
+                            icon: "💒",
+                            question_count: 5,
+                        },
+                        family: {
+                            title: "Family",
+                            icon: "👨‍👩‍👧‍👦",
+                            question_count: 4,
+                        },
+                        education: {
+                            title: "Education",
+                            icon: "📚",
+                            question_count: 4,
+                        },
+                        career: {
+                            title: "Career",
+                            icon: "💼",
+                            question_count: 4,
+                        },
+                        relationships: {
+                            title: "Relationships",
+                            icon: "❤️",
+                            question_count: 4,
+                        },
+                        experiences: {
+                            title: "Experiences",
+                            icon: "🌍",
+                            question_count: 4,
+                        },
+                        wisdom: {
+                            title: "Wisdom",
+                            icon: "💡",
+                            question_count: 4,
+                        },
+                        legacy: {
+                            title: "Legacy",
+                            icon: "✨",
+                            question_count: 4,
+                        },
+                    });
+
+                    // WebSocket
+                    let ws = null;
+
+                    // Speech Recognition
+                    let recognition = null;
+                    if ("webkitSpeechRecognition" in window) {
+                        recognition = new webkitSpeechRecognition();
+                        recognition.continuous = true;
+                        recognition.lang = "en-US";
+                        recognition.interimResults = true;
+
+                        recognition.onresult = (event) => {
+                            let transcript = "";
+                            for (
+                                let i = event.resultIndex;
+                                i < event.results.length;
+                                i++
+                            ) {
+                                transcript += event.results[i][0].transcript;
+                            }
+                            inputMessage.value = transcript;
+                        };
+
+                        recognition.onend = () => {
+                            isRecording.value = false;
+                        };
+                    }
+
+                    // Methods
+                    const startSession = async () => {
+                        if (!userName.value.trim()) return;
+
+                        try {
+                            const response = await fetch(
+                                `${API_URL}/api/session/start`,
+                                {
+                                    method: "POST",
+                                    headers: {
+                                        "Content-Type": "application/json",
+                                    },
+                                    body: JSON.stringify({
+                                        subject_name: userName.value.trim(),
+                                    }),
+                                },
+                            );
+
+                            const data = await response.json();
+                            session.value = data;
+                            currentQuestion.value = data.current_question;
+
+                            // Add greeting message
+                            addMessage("bot", data.greeting);
+
+                            // Connect WebSocket
+                            connectWebSocket(data.session_id);
+
+                            // Load categories
+                            loadCategories();
+                        } catch (error) {
+                            console.error("Failed to start session:", error);
+                            alert(
+                                "Failed to connect to server. Make sure the backend is running.",
+                            );
+                        }
+                    };
+
+                    const loadCategories = async () => {
+                        try {
+                            const response = await fetch(
+                                `${API_URL}/api/categories`,
+                            );
+                            const data = await response.json();
+                            data.categories.forEach((cat) => {
+                                categories.value[cat.id] = {
+                                    title: cat.title,
+                                    icon: cat.icon,
+                                    question_count: cat.question_count,
+                                };
+                            });
+                        } catch (error) {
+                            console.error("Failed to load categories:", error);
+                        }
+                    };
+
+                    const connectWebSocket = (sessionId) => {
+                        ws = new WebSocket(
+                            `${WS_URL}/ws/${sessionId}`,
+                        );
+
+                        ws.onmessage = (event) => {
+                            const data = JSON.parse(event.data);
+
+                            isTyping.value = false;
+
+                            if (data.type === "response" || data.response) {
+                                addMessage("bot", data.response);
+                                currentQuestion.value = data.current_question;
+                                progress.value = data.progress || 0;
+
+                                if (data.complete) {
+                                    isComplete.value = true;
+                                }
+                            } else if (data.type === "skipped") {
+                                currentQuestion.value = data.current_question;
+                                progress.value = data.progress || 0;
+                                if (currentQuestion.value) {
+                                    addMessage(
+                                        "bot",
+                                        `Let's move on. ${currentQuestion.value.question}`,
+                                    );
+                                }
+                            }
+                        };
+
+                        ws.onerror = (error) => {
+                            console.error("WebSocket error:", error);
+                        };
+                    };
+
+                    const sendMessage = async () => {
+                        if (!inputMessage.value.trim()) return;
+
+                        const message = inputMessage.value.trim();
+                        inputMessage.value = "";
+
+                        addMessage("user", message);
+                        isTyping.value = true;
+
+                        if (ws && ws.readyState === WebSocket.OPEN) {
+                            ws.send(
+                                JSON.stringify({
+                                    type: "message",
+                                    message: message,
+                                }),
+                            );
+                        } else {
+                            // Fallback to REST API
+                            try {
+                                const response = await fetch(
+                                    `${API_URL}/api/chat`,
+                                    {
+                                        method: "POST",
+                                        headers: {
+                                            "Content-Type": "application/json",
+                                        },
+                                        body: JSON.stringify({
+                                            session_id:
+                                                session.value.session_id,
+                                            message: message,
+                                        }),
+                                    },
+                                );
+
+                                const data = await response.json();
+                                isTyping.value = false;
+                                addMessage("bot", data.response);
+                                currentQuestion.value = data.current_question;
+                                progress.value = data.progress || 0;
+
+                                if (data.complete) {
+                                    isComplete.value = true;
+                                }
+                            } catch (error) {
+                                console.error("Failed to send message:", error);
+                                isTyping.value = false;
+                            }
+                        }
+                    };
+
+                    const skipQuestion = () => {
+                        if (ws && ws.readyState === WebSocket.OPEN) {
+                            ws.send(JSON.stringify({ type: "skip" }));
+                        }
+                    };
+
+                    const toggleVoice = () => {
+                        if (!recognition) {
+                            alert(
+                                "Speech recognition is not supported in your browser.",
+                            );
+                            return;
+                        }
+
+                        if (isRecording.value) {
+                            recognition.stop();
+                            isRecording.value = false;
+                        } else {
+                            recognition.start();
+                            isRecording.value = true;
+                        }
+                    };
+
+                    const addMessage = (type, text) => {
+                        messages.value.push({
+                            type,
+                            text,
+                            time: new Date().toLocaleTimeString([], {
+                                hour: "2-digit",
+                                minute: "2-digit",
+                            }),
+                        });
+
+                        nextTick(() => {
+                            if (messagesContainer.value) {
+                                messagesContainer.value.scrollTop =
+                                    messagesContainer.value.scrollHeight;
+                            }
+                        });
+                    };
+
+                    const isChapterComplete = (chapterId) => {
+                        if (!currentQuestion.value) return false;
+                        const chapterIndex = Object.keys(
+                            categories.value,
+                        ).indexOf(chapterId);
+                        const currentIndex = Object.keys(
+                            categories.value,
+                        ).indexOf(currentQuestion.value.category);
+                        return chapterIndex < currentIndex;
+                    };
+
+                    const generateBiography = async () => {
+                        isGenerating.value = true;
+
+                        try {
+                            await fetch(
+                                `${API_URL}/api/biography/generate/${session.value.session_id}`,
+                                {
+                                    method: "POST",
+                                },
+                            );
+
+                            // Get preview
+                            const previewResponse = await fetch(
+                                `${API_URL}/api/biography/preview/${session.value.session_id}`,
+                            );
+                            const previewData = await previewResponse.json();
+                            biographyPreview.value = previewData.content;
+
+                            biographyGenerated.value = true;
+                        } catch (error) {
+                            console.error(
+                                "Failed to generate biography:",
+                                error,
+                            );
+                            alert(
+                                "Failed to generate biography. Please try again.",
+                            );
+                        } finally {
+                            isGenerating.value = false;
+                        }
+                    };
+
+                    const downloadBiography = (format) => {
+                        window.open(
+                            `${API_URL}/api/biography/download/${session.value.session_id}/${format}`,
+                            "_blank",
+                        );
+                    };
+
+                    return {
+                        userName,
+                        session,
+                        messages,
+                        inputMessage,
+                        isTyping,
+                        isRecording,
+                        progress,
+                        currentQuestion,
+                        isComplete,
+                        isGenerating,
+                        biographyGenerated,
+                        biographyPreview,
+                        categories,
+                        messagesContainer,
+                        chatInput,
+                        startSession,
+                        sendMessage,
+                        skipQuestion,
+                        toggleVoice,
+                        isChapterComplete,
+                        generateBiography,
+                        downloadBiography,
+                    };
+                },
+            }).mount("#app");
+        </script>
+    </body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "session_id": "31d177bf",
+  "subject_name": "tes",
+  "collected_stories": {
+    "early_life": [
+      {
+        "question": "Where and when were you born?",
+        "answer": "hey",
+        "timestamp": "2026-02-18T15:40:05.882236"
+      },
+      {
+        "question": "What is your earliest memory?",
+        "answer": "end",
+        "timestamp": "2026-02-18T15:40:09.626027"
+      }
+    ]
+  },
+  "current_category_index": 0,
+  "current_question_index": 2,
+  "created_at": "2026-02-18T15:40:02.122818",
+  "progress": 6
+}

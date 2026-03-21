@@ -1,0 +1,49 @@
+{
+  "subject_name": "Roni",
+  "collected_stories": {
+    "early_life": [
+      {
+        "question": "Let's start at the very beginning. Where and when were you born, and what was happening in the world at that time?",
+        "answer": "I was born in Istanbul",
+        "timestamp": "2026-02-17T23:27:25.257800"
+      },
+      {
+        "question": "What is your earliest memory? Can you describe it in detail?",
+        "answer": "I don't remember",
+        "timestamp": "2026-02-17T23:27:46.616603"
+      },
+      {
+        "question": "Tell me about the home where you grew up. What did it look like, smell like, feel like?",
+        "answer": "it's a great cosy home where I live",
+        "timestamp": "2026-02-17T23:28:04.972691"
+      },
+      {
+        "question": "What was your neighborhood like? Who were the characters that lived around you?",
+        "answer": "Hero",
+        "timestamp": "2026-02-17T23:28:30.927590"
+      },
+      {
+        "question": "What were your favorite games, toys, or activities as a child?",
+        "answer": "playing video",
+        "timestamp": "2026-02-17T23:28:49.058951"
+      },
+      {
+        "question": "Did you have any childhood fears or recurring dreams?",
+        "answer": "I have already answer",
+        "timestamp": "2026-02-17T23:29:28.707521"
+      }
+    ],
+    "family_roots": [
+      {
+        "question": "Tell me about your parents. What were their names, and what were they like as people?",
+        "answer": "generatae me the bio",
+        "timestamp": "2026-02-17T23:30:11.435007"
+      }
+    ]
+  },
+  "current_category_index": 1,
+  "current_question_index": 1,
+  "interview_complete": true,
+  "start_date": "2026-02-17T23:26:50.454555",
+  "last_saved": "2026-02-17T23:31:03.975473"
+}
