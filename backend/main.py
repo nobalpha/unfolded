@@ -56,6 +56,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.mount("/static", StaticFiles(directory="../static"), name="static")
+
+
 templates = Jinja2Templates(directory="backend/templates")
 
 # ============================================================================
@@ -191,10 +194,47 @@ class MessageRequest(BaseModel):
     message: str
 
 
+class WaitlistRequest(BaseModel):
+    email: str
+    name: Optional[str] = None
+    source: Optional[str] = None
+
+
 @app.get("/")
 async def root(request: Request):
+    return templates.TemplateResponse("landing.html", {"request": request})
 
-    return templates.TemplateResponse("./index.html", {"request": request})
+
+@app.post("/api/waitlist")
+async def join_waitlist(request: WaitlistRequest):
+    email = request.email.strip().lower()
+    if not email:
+        raise HTTPException(status_code=400, detail="Email is required")
+
+    waitlist_file = DATA_DIR / "waitlist.json"
+    entries = []
+
+    if waitlist_file.exists():
+        with open(waitlist_file, "r", encoding="utf-8") as f:
+            try:
+                entries = json.load(f)
+            except json.JSONDecodeError:
+                entries = []
+
+    if any(entry.get("email", "").lower() == email for entry in entries):
+        return {"message": "You are already on the list."}
+
+    entries.append({
+        "email": email,
+        "name": (request.name or "").strip(),
+        "source": (request.source or "").strip(),
+        "created_at": datetime.datetime.now().isoformat()
+    })
+
+    with open(waitlist_file, "w", encoding="utf-8") as f:
+        json.dump(entries, f, indent=2, ensure_ascii=False)
+
+    return {"message": "You are on the list."}
 
 
 @app.get("/api/categories")
@@ -632,10 +672,16 @@ TEMPLATES_DIR = Path(__file__).parent / "templates"
 templates = Jinja2Templates(directory=str(TEMPLATES_DIR))
 
 
-@app.get("/", response_class=HTMLResponse)
+@app.get("/app", response_class=HTMLResponse)
 async def serve_frontend(request: Request):
     """Serve the frontend application."""
     return templates.TemplateResponse("index.html", {"request": request})
+
+
+@app.get("/landing-studio", response_class=HTMLResponse)
+async def serve_studio_landing(request: Request):
+    """Serve the studio-inspired landing variation."""
+    return templates.TemplateResponse("landing_newgenre.html", {"request": request})
 
 # ============================================================================
 # RUN SERVER

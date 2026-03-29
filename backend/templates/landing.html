@@ -1,0 +1,1132 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Unfolded | Literary Identity</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            :root {
+                --bg: #fffaf4;
+                --ink: #1a1720;
+                --muted: #5f5b67;
+                --card: #ffffff;
+                --line: rgba(32, 27, 41, 0.08);
+                --peach: #ffb37d;
+                --rose: #ffa1b8;
+                --sky: #8bc9ff;
+                --mint: #8fe5c2;
+            }
+
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            html {
+                scroll-behavior: smooth;
+            }
+
+            body {
+                background:
+                    radial-gradient(
+                        circle at 10% 12%,
+                        rgba(255, 161, 184, 0.32),
+                        transparent 34%
+                    ),
+                    radial-gradient(
+                        circle at 90% 5%,
+                        rgba(139, 201, 255, 0.26),
+                        transparent 38%
+                    ),
+                    radial-gradient(
+                        circle at 55% 100%,
+                        rgba(143, 229, 194, 0.24),
+                        transparent 36%
+                    ),
+                    var(--bg);
+                color: var(--ink);
+                font-family: "Outfit", "Segoe UI", sans-serif;
+                line-height: 1.6;
+                min-height: 100vh;
+            }
+
+            h1,
+            h2,
+            h3 {
+                color: #17121f;
+                font-family: "Playfair Display", Georgia, serif;
+                font-weight: 600;
+                letter-spacing: 0.01em;
+            }
+
+            .container {
+                margin: 0 auto;
+                max-width: 1180px;
+                padding: 1.35rem;
+            }
+
+            .topbar {
+                align-items: center;
+                backdrop-filter: blur(6px);
+                background: rgba(255, 255, 255, 0.62);
+                border: 1px solid var(--line);
+                border-radius: 14px;
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 1.1rem;
+                padding: 0.5rem 0.75rem;
+            }
+
+            .brand {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                font-size: 0.78rem;
+                font-weight: 700;
+                letter-spacing: 0.1em;
+                padding: 0.25rem 0.2rem;
+                text-transform: uppercase;
+            }
+
+            .brand-logo {
+                border-radius: 999px;
+                height: 30px;
+                object-fit: cover;
+                width: 150px;
+            }
+
+            .brand-text {
+                line-height: 1;
+            }
+
+            .nav-links {
+                display: inline-flex;
+                gap: 1.1rem;
+            }
+
+            .nav-links a {
+                color: #2f2a3c;
+                font-size: 0.84rem;
+                font-weight: 500;
+                letter-spacing: 0.02em;
+                text-decoration: none;
+            }
+
+            .nav-links a:hover {
+                text-decoration: underline;
+                text-underline-offset: 3px;
+            }
+
+            .nav-login {
+                align-items: center;
+                background: #ffffff;
+                border: 1px solid var(--line);
+                border-radius: 999px;
+                color: #201a2f;
+                display: inline-flex;
+                font-size: 0.82rem;
+                font-weight: 600;
+                gap: 0.45rem;
+                min-height: 36px;
+                padding: 0.45rem 0.8rem;
+                text-decoration: none;
+            }
+
+            .nav-actions {
+                align-items: center;
+                display: inline-flex;
+                gap: 0.5rem;
+            }
+
+            .nav-coin {
+                align-items: center;
+                background: #fff7ef;
+                border: 1px solid rgba(42, 38, 94, 0.22);
+                border-radius: 999px;
+                color: #2a265e;
+                cursor: pointer;
+                display: inline-flex;
+                font-family: inherit;
+                font-size: 0.82rem;
+                font-weight: 600;
+                gap: 0.4rem;
+                min-height: 36px;
+                padding: 0.45rem 0.8rem;
+            }
+
+            .coin-logo {
+                align-items: center;
+                background: linear-gradient(135deg, #ffd46b, #ffc13d);
+                border-radius: 999px;
+                color: #5f4100;
+                display: inline-flex;
+                font-size: 0.64rem;
+                font-weight: 700;
+                height: 18px;
+                justify-content: center;
+                width: 18px;
+            }
+
+            .login-logo {
+                align-items: center;
+                background: linear-gradient(135deg, #2a265e, #5e58be);
+                border-radius: 999px;
+                color: #ffffff;
+                display: inline-flex;
+                font-size: 0.62rem;
+                font-weight: 700;
+                height: 18px;
+                justify-content: center;
+                width: 18px;
+            }
+
+            .hero {
+                background: linear-gradient(
+                    135deg,
+                    rgba(255, 255, 255, 0.85),
+                    rgba(255, 255, 255, 0.62)
+                );
+                border: 1px solid var(--line);
+                border-radius: 26px;
+                box-shadow: 0 20px 50px rgba(28, 20, 37, 0.08);
+                display: grid;
+                grid-template-columns: minmax(0, 1.1fr) minmax(260px, 420px);
+                gap: 0;
+                min-height: 68vh;
+                overflow: hidden;
+                position: relative;
+            }
+
+            .hero::before,
+            .hero::after {
+                border-radius: 999px;
+                content: "";
+                filter: blur(8px);
+                position: absolute;
+                z-index: 0;
+            }
+
+            .hero::before {
+                background: linear-gradient(135deg, var(--peach), var(--rose));
+                height: 180px;
+                opacity: 0.32;
+                right: -40px;
+                top: -50px;
+                width: 180px;
+            }
+
+            .hero::after {
+                background: linear-gradient(135deg, var(--sky), var(--mint));
+                bottom: -50px;
+                height: 220px;
+                left: -70px;
+                opacity: 0.24;
+                width: 220px;
+            }
+
+            .hero-content {
+                display: grid;
+                gap: 0.95rem;
+                padding: clamp(2rem, 6vw, 4.2rem);
+                padding-top: clamp(3rem, 9vw, 9rem);
+                position: relative;
+                z-index: 1;
+            }
+
+            .hero-visual {
+                display: grid;
+                min-height: 100%;
+
+                overflow: hidden;
+                position: relative;
+                z-index: 1;
+            }
+
+            .hero-visual img {
+                height: 100%;
+                object-fit: cover;
+                transform: scale(1.04);
+                width: 100%;
+            }
+
+            .company-name {
+                color: #201a2f;
+                font-family: "Playfair Display", Georgia, serif;
+                font-size: clamp(2.4rem, 9vw, 6rem);
+                line-height: 0.96;
+                margin-bottom: 0.25rem;
+                text-align: left;
+            }
+
+            .company-name span {
+                background: linear-gradient(
+                    130deg,
+                    #2a265e,
+                    #5e58be 55%,
+                    #8bc9ff
+                );
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                color: transparent;
+            }
+
+            .eyebrow {
+                color: var(--muted);
+                font-size: 0.74rem;
+                font-weight: 600;
+                letter-spacing: 0.16em;
+                margin-bottom: 0.7rem;
+                text-transform: uppercase;
+            }
+
+            .hero h1 {
+                font-size: clamp(2.1rem, 6vw, 4.3rem);
+                line-height: 1.08;
+                margin-bottom: 0.45rem;
+            }
+
+            .hero h2 {
+                color: #342c43;
+                font-size: clamp(1.05rem, 3.4vw, 1.6rem);
+                margin-bottom: 0.9rem;
+            }
+
+            .hero p {
+                color: #4f495b;
+                max-width: 60ch;
+            }
+
+            .actions {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.65rem;
+                margin-top: 1.35rem;
+            }
+
+            .btn {
+                align-items: center;
+                border-radius: 999px;
+                display: inline-flex;
+                font-size: 0.85rem;
+                font-weight: 600;
+                justify-content: center;
+                letter-spacing: 0.04em;
+                min-height: 42px;
+                padding: 0.68rem 1.1rem;
+                text-decoration: none;
+                transition:
+                    transform 0.16s ease,
+                    box-shadow 0.16s ease;
+            }
+
+            .btn:hover {
+                transform: translateY(-1px);
+            }
+
+            .btn-primary {
+                background: linear-gradient(
+                    135deg,
+                    #2a265e,
+                    #3c3688 55%,
+                    #5e58be
+                );
+                box-shadow: 0 14px 26px rgba(58, 50, 132, 0.25);
+                color: #ffffff;
+            }
+
+            .btn-secondary {
+                background: rgba(255, 255, 255, 0.86);
+                border: 1px solid var(--line);
+                color: #25202f;
+            }
+
+            .stack {
+                display: grid;
+                gap: 1.15rem;
+                margin-top: 1.2rem;
+            }
+
+            .cards {
+                display: grid;
+                gap: 1rem;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+
+            .card {
+                background: var(--card);
+                border: 1px solid var(--line);
+                border-radius: 16px;
+                box-shadow: 0 12px 26px rgba(30, 25, 40, 0.06);
+                min-height: 180px;
+                padding: 1.25rem;
+                transition: transform 0.2s ease;
+            }
+
+            .card:hover {
+                transform: translateY(-3px);
+            }
+
+            .chip {
+                border-radius: 999px;
+                color: #272133;
+                display: inline-block;
+                font-size: 0.72rem;
+                font-weight: 600;
+                letter-spacing: 0.08em;
+                margin-bottom: 0.45rem;
+                padding: 0.22rem 0.58rem;
+                text-transform: uppercase;
+            }
+
+            .chip-a {
+                background: rgba(255, 179, 125, 0.26);
+            }
+
+            .chip-b {
+                background: rgba(139, 201, 255, 0.28);
+            }
+
+            .chip-c {
+                background: rgba(143, 229, 194, 0.3);
+            }
+
+            .card p {
+                color: var(--muted);
+                font-size: 0.94rem;
+            }
+
+            .card h3 {
+                font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+                margin-bottom: 0.4rem;
+            }
+
+            .section-panel {
+                background: linear-gradient(
+                    135deg,
+                    rgba(255, 255, 255, 0.92),
+                    rgba(255, 255, 255, 0.7)
+                );
+                border: 1px solid var(--line);
+                border-radius: 20px;
+                box-shadow: 0 12px 26px rgba(30, 25, 40, 0.06);
+                min-height: 250px;
+                padding: 1.35rem;
+            }
+
+            .section-label {
+                color: #5b5569;
+                font-size: 0.74rem;
+                font-weight: 600;
+                letter-spacing: 0.13em;
+                margin-bottom: 0.5rem;
+                text-transform: uppercase;
+            }
+
+            .section-panel h3 {
+                font-size: clamp(2rem, 3.5vw, 2.5rem);
+                margin-bottom: 0.55rem;
+            }
+
+            .team-section h3 {
+                font-size: clamp(2rem, 3.5vw, 2.5rem);
+                margin-bottom: 0.2rem;
+            }
+
+            .section-panel p {
+                color: var(--muted);
+                max-width: 60ch;
+            }
+
+            .team-section {
+                background: linear-gradient(
+                    135deg,
+                    rgba(255, 255, 255, 0.92),
+                    rgba(255, 255, 255, 0.7)
+                );
+                border: 1px solid var(--line);
+                border-radius: 20px;
+                box-shadow: 0 12px 26px rgba(30, 25, 40, 0.06);
+                min-height: 280px;
+                padding: 1.35rem;
+            }
+
+            .team-grid {
+                display: grid;
+                gap: 0.8rem;
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+                margin-top: 0.75rem;
+            }
+
+            .team-card {
+                background: rgba(255, 255, 255, 0.7);
+                border: 1px solid var(--line);
+                border-radius: 12px;
+                display: grid;
+                gap: 0.5rem;
+                overflow: hidden;
+                padding: 0.68rem;
+                transition: transform 0.18s ease;
+            }
+
+            .team-card:hover {
+                transform: translateY(-2px);
+            }
+
+            .persona {
+                aspect-ratio: 1 / 1;
+                border-radius: 10px;
+                object-fit: cover;
+                width: 100%;
+            }
+
+            .team-card strong {
+                color: #251e35;
+                font-size: 0.96rem;
+                font-weight: 600;
+            }
+
+            .team-card span {
+                color: #6d6878;
+                font-size: 0.85rem;
+            }
+
+            .waitlist {
+                background: linear-gradient(
+                    135deg,
+                    rgba(255, 255, 255, 0.9),
+                    rgba(255, 255, 255, 0.72)
+                );
+                border: 1px solid var(--line);
+                border-radius: 18px;
+                box-shadow: 0 12px 26px rgba(30, 25, 40, 0.06);
+                padding: 1.25rem;
+            }
+
+            .subscription-mini {
+                background: linear-gradient(
+                    135deg,
+                    rgba(255, 255, 255, 0.92),
+                    rgba(255, 255, 255, 0.76)
+                );
+                border: 1px solid var(--line);
+                border-radius: 18px;
+                box-shadow: 0 12px 26px rgba(30, 25, 40, 0.06);
+                display: grid;
+                gap: 0.75rem;
+                margin-top: 1.15rem;
+                padding: 1.2rem;
+            }
+
+            .subscription-mini h3 {
+                font-size: clamp(1.5rem, 2.8vw, 1.9rem);
+                margin-bottom: 0.15rem;
+            }
+
+            .subscription-mini p {
+                color: var(--muted);
+            }
+
+            .sub-grid {
+                display: grid;
+                gap: 0.7rem;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+
+            .sub-card {
+                background: #ffffff;
+                border: 1px solid var(--line);
+                border-radius: 12px;
+                padding: 0.75rem;
+            }
+
+            .sub-card strong {
+                color: #2a265e;
+                display: block;
+                font-size: 0.95rem;
+                margin-bottom: 0.2rem;
+            }
+
+            .sub-card span {
+                color: #3e3854;
+                font-size: 0.9rem;
+                font-weight: 600;
+            }
+
+            .sub-card ul {
+                color: #5a5567;
+                display: grid;
+                font-size: 0.84rem;
+                gap: 0.2rem;
+                margin-top: 0.55rem;
+                padding-left: 1rem;
+            }
+
+            .sub-card li::marker {
+                color: #5e58be;
+            }
+
+            .sub-actions {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.55rem;
+                margin-top: 0.3rem;
+            }
+
+            .coin-modal-backdrop {
+                align-items: center;
+                background: rgba(18, 12, 30, 0.52);
+                display: none;
+                inset: 0;
+                justify-content: center;
+                padding: 1rem;
+                position: fixed;
+                z-index: 40;
+            }
+
+            .coin-modal-backdrop.open {
+                display: flex;
+            }
+
+            .coin-modal {
+                background: #fffdf9;
+                border: 1px solid rgba(26, 23, 32, 0.12);
+                border-radius: 16px;
+                box-shadow: 0 24px 60px rgba(16, 12, 25, 0.24);
+                max-width: 420px;
+                padding: 1rem;
+                width: 100%;
+            }
+
+            .coin-modal-head {
+                align-items: center;
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 0.55rem;
+            }
+
+            .coin-modal-head h4 {
+                font-size: 1.15rem;
+            }
+
+            .modal-close {
+                background: transparent;
+                border: 0;
+                color: #4d4858;
+                cursor: pointer;
+                font-size: 1.2rem;
+                line-height: 1;
+            }
+
+            .coin-pack-grid {
+                display: grid;
+                gap: 0.5rem;
+                margin-top: 0.75rem;
+            }
+
+            .coin-pack {
+                align-items: center;
+                background: #ffffff;
+                border: 1px solid var(--line);
+                border-radius: 10px;
+                cursor: pointer;
+                display: flex;
+                justify-content: space-between;
+                padding: 0.65rem 0.7rem;
+                width: 100%;
+            }
+
+            .coin-pack.active {
+                border-color: #5e58be;
+                box-shadow: 0 0 0 2px rgba(94, 88, 190, 0.12);
+            }
+
+            .coin-pack b {
+                color: #241f2f;
+                font-size: 0.92rem;
+            }
+
+            .coin-pack span {
+                color: #4f495b;
+                font-size: 0.85rem;
+            }
+
+            .coin-modal .btn {
+                margin-top: 0.8rem;
+                width: 100%;
+            }
+
+            .waitlist h3 {
+                font-size: clamp(1.9rem, 3vw, 2.2rem);
+                margin-bottom: 0.28rem;
+            }
+
+            .waitlist p {
+                color: var(--muted);
+                margin-bottom: 0.75rem;
+            }
+
+            .waitlist-row {
+                display: grid;
+                gap: 0.5rem;
+                grid-template-columns: 1fr 1fr auto;
+            }
+
+            .field {
+                background: #fffcf8;
+                border: 1px solid var(--line);
+                border-radius: 10px;
+                color: #241f2f;
+                font: inherit;
+                min-height: 42px;
+                padding: 0.65rem 0.75rem;
+            }
+
+            .status {
+                color: #5f5b67;
+                font-size: 0.86rem;
+                margin-top: 0.4rem;
+                min-height: 1.2rem;
+            }
+
+            .status.success {
+                color: #0a7a57;
+            }
+
+            .status.error {
+                color: #9b2a45;
+            }
+
+            footer {
+                color: #6a6572;
+                font-size: 0.82rem;
+                padding: 0.45rem 0 1rem;
+                text-align: center;
+            }
+
+            @media (max-width: 900px) {
+                .nav-links {
+                    display: none;
+                }
+
+                .sub-grid {
+                    grid-template-columns: 1fr;
+                }
+
+                .hero {
+                    grid-template-columns: 1fr;
+                }
+
+                .hero-visual {
+                    border-left: 0;
+                    border-top: 1px solid var(--line);
+                    min-height: 260px;
+                }
+
+                .hero-visual::before {
+                    display: none;
+                }
+
+                .hero-visual::after {
+                    border-radius: 18px;
+                    inset: 12px;
+                }
+
+                .cards {
+                    grid-template-columns: 1fr;
+                }
+
+                .team-grid {
+                    grid-template-columns: repeat(2, minmax(0, 1fr));
+                }
+
+                .waitlist-row {
+                    grid-template-columns: 1fr;
+                }
+            }
+
+            @media (max-width: 620px) {
+                .topbar {
+                    gap: 0.45rem;
+                }
+
+                .brand-text {
+                    display: none;
+                }
+
+                .team-grid {
+                    grid-template-columns: 1fr;
+                }
+
+                .nav-actions {
+                    gap: 0.3rem;
+                }
+
+                .nav-coin,
+                .nav-login {
+                    padding: 0.4rem 0.6rem;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <main class="container">
+            <header class="topbar">
+                <a class="brand" href="#" aria-label="Unfolded home">
+                    <img
+                        class="brand-logo"
+                        src="/static/logo/v2_c.png"
+                        alt="Unfolded logo"
+                    />
+                </a>
+                <nav class="nav-links" aria-label="Primary">
+                    <a href="#about">About</a>
+                    <a href="#team">Team</a>
+                    <a href="#details">Stories</a>
+                </nav>
+                <div class="nav-actions">
+                    <button class="nav-coin" type="button" data-open-coin-modal>
+                        <span class="coin-logo">C</span>
+                        Buy Coins
+                    </button>
+                    <a class="nav-login" href="/app">
+                        <span class="login-logo">U</span>
+                        Login
+                    </a>
+                </div>
+            </header>
+
+            <section class="hero">
+                <div class="hero-content">
+                    <div class="eyebrow">Literary identity company</div>
+                    <h1 class="company-name"><span>UNFOLDED</span></h1>
+
+                    <h2>
+                        This is not about writing. <br />
+                        It is about seeing your life as a story.
+                    </h2>
+                    <p>
+                        Unfolded helps people turn life memories into vivid
+                        personal narratives with clarity, warmth, and emotional
+                        depth.
+                    </p>
+                    <div class="actions">
+                        <a class="btn btn-primary" href="/app"
+                            >Dive into your story!</a
+                        >
+                        <a class="btn btn-secondary" href="#details"
+                            >Learn More</a
+                        >
+                    </div>
+                </div>
+                <aside class="hero-visual" aria-hidden="true">
+                    <img src="/static/logo/bg.jpg" alt="" />
+                </aside>
+            </section>
+
+            <section class="stack" id="details">
+                <div class="cards">
+                    <article class="card">
+                        <span class="chip chip-a">Reflect</span>
+                        <h3>Reframe your moments</h3>
+                        <p>Capture what happened and uncover what it meant.</p>
+                    </article>
+                    <article class="card">
+                        <span class="chip chip-b">Narrative</span>
+                        <h3>Elegant AI storytelling</h3>
+                        <p>
+                            Your memories become graceful, readable, literary
+                            chapters.
+                        </p>
+                    </article>
+                    <article class="card">
+                        <span class="chip chip-c">Identity</span>
+                        <h3>See your life clearly</h3>
+                        <p>
+                            Find themes and patterns that reveal who you are
+                            becoming.
+                        </p>
+                    </article>
+                </div>
+
+                <article class="section-panel" id="about">
+                    <div class="section-label">About Us</div>
+                    <h3>We make memory feel meaningful.</h3>
+                    <p>
+                        Unfolded exists to help people look at their own lives
+                        with tenderness and perspective. We build calm AI
+                        experiences that transform personal moments into
+                        narrative clarity, so identity feels authored rather
+                        than fragmented.
+                    </p>
+                </article>
+
+                <section class="subscription-mini" id="subscriptions">
+                    <h3>Subscription Plans</h3>
+                    <p>
+                        Pick a plan based on how much end-of-writing retouch and
+                        redaction support you need.
+                    </p>
+                    <div class="sub-grid">
+                        <article class="sub-card">
+                            <strong>Starter</strong>
+                            <span>$9 / month</span>
+                            <ul>
+                                <li>10 end-of-writing retouches</li>
+                                <li>Basic redaction support</li>
+                                <li>Monthly story export</li>
+                            </ul>
+                        </article>
+                        <article class="sub-card">
+                            <strong>Writer</strong>
+                            <span>$19 / month</span>
+                            <ul>
+                                <li>50 end-of-writing retouches</li>
+                                <li>Advanced redaction tools</li>
+                                <li>Priority generation speed</li>
+                            </ul>
+                        </article>
+                        <article class="sub-card">
+                            <strong>Legacy</strong>
+                            <span>$39 / month</span>
+                            <ul>
+                                <li>Unlimited end-of-writing retouches</li>
+                                <li>Full redaction and rewrite controls</li>
+                                <li>Dedicated long-form biography mode</li>
+                            </ul>
+                        </article>
+                    </div>
+                    <div class="sub-actions">
+                        <button
+                            class="btn btn-secondary"
+                            type="button"
+                            data-open-coin-modal
+                        >
+                            Buy Coins
+                        </button>
+                        <a class="btn btn-primary" href="/app">View Plans</a>
+                    </div>
+                </section>
+
+                <section class="team-section" id="team">
+                    <div class="section-label">Our Team</div>
+                    <h3>Writers, builders, listeners.</h3>
+                    <div class="team-grid">
+                        <article class="team-card">
+                            <img
+                                class="persona"
+                                src="./static/team/ela.jpg"
+                                alt="Portrait of Ela Alpagut"
+                            />
+                            <strong>Ela Alpagut</strong>
+                            <span>CEO & Founder</span>
+                        </article>
+                        <article class="team-card">
+                            <img
+                                class="persona"
+                                src="./static/team/roni.jpg"
+                                alt="Portrait of Roni Kolukisayan"
+                            />
+                            <strong>Roni Kolukisayan</strong>
+                            <span>CTO & Co-Founder</span>
+                        </article>
+                        <article class="team-card">
+                            <img
+                                class="persona"
+                                src="./static/team/doruk.jpg"
+                                alt="Portrait of Doruk Berberoğlu"
+                            />
+                            <strong>Doruk Berberoğlu</strong>
+                            <span>Content & Brand Producer</span>
+                        </article>
+                        <article class="team-card">
+                            <img
+                                class="persona"
+                                src="./static/team/santiago.jpg"
+                                alt="Portrait of Santiago Carrion"
+                            />
+                            <strong>Santiago Carrion</strong>
+                            <span>Lead Content Creator</span>
+                        </article>
+                    </div>
+                </section>
+
+                <section class="waitlist">
+                    <h3>Stay in the story</h3>
+                    <p>Get gentle updates and early access notes.</p>
+                    <form id="waitlistForm">
+                        <div class="waitlist-row">
+                            <input
+                                id="waitlistName"
+                                class="field"
+                                type="text"
+                                placeholder="Name (optional)"
+                            />
+                            <input
+                                id="waitlistEmail"
+                                class="field"
+                                type="email"
+                                placeholder="Email"
+                                required
+                            />
+                            <button
+                                class="btn btn-primary"
+                                type="submit"
+                                id="waitlistButton"
+                            >
+                                Join
+                            </button>
+                        </div>
+                        <div
+                            id="waitlistStatus"
+                            class="status"
+                            aria-live="polite"
+                        ></div>
+                    </form>
+                </section>
+            </section>
+
+            <footer>Unfolded - Literary identity with AI</footer>
+        </main>
+
+        <div
+            id="coinModalBackdrop"
+            class="coin-modal-backdrop"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="coinModalTitle"
+        >
+            <section class="coin-modal">
+                <div class="coin-modal-head">
+                    <h4 id="coinModalTitle">Buy Story Coins</h4>
+                    <button
+                        id="coinModalClose"
+                        class="modal-close"
+                        type="button"
+                        aria-label="Close"
+                    >
+                        x
+                    </button>
+                </div>
+                <p>
+                    Use coins for deeper interview rounds and long-form chapter
+                    generation.
+                </p>
+                <div class="coin-pack-grid" id="coinPackGrid">
+                    <button class="coin-pack active" type="button">
+                        <b>120 coins</b>
+                        <span>$5</span>
+                    </button>
+                    <button class="coin-pack" type="button">
+                        <b>300 coins</b>
+                        <span>$10</span>
+                    </button>
+                    <button class="coin-pack" type="button">
+                        <b>700 coins</b>
+                        <span>$20</span>
+                    </button>
+                </div>
+                <a class="btn btn-primary" href="/app">Continue</a>
+            </section>
+        </div>
+
+        <script>
+            const waitlistForm = document.getElementById("waitlistForm");
+            const waitlistStatus = document.getElementById("waitlistStatus");
+            const waitlistButton = document.getElementById("waitlistButton");
+            const waitlistName = document.getElementById("waitlistName");
+            const waitlistEmail = document.getElementById("waitlistEmail");
+            const coinModalBackdrop =
+                document.getElementById("coinModalBackdrop");
+            const coinModalClose = document.getElementById("coinModalClose");
+            const openCoinModalButtons = document.querySelectorAll(
+                "[data-open-coin-modal]",
+            );
+            const coinPacks = document.querySelectorAll(".coin-pack");
+
+            const openCoinModal = () => {
+                coinModalBackdrop.classList.add("open");
+            };
+
+            const closeCoinModal = () => {
+                coinModalBackdrop.classList.remove("open");
+            };
+
+            openCoinModalButtons.forEach((button) => {
+                button.addEventListener("click", openCoinModal);
+            });
+
+            coinModalClose.addEventListener("click", closeCoinModal);
+
+            coinModalBackdrop.addEventListener("click", (event) => {
+                if (event.target === coinModalBackdrop) {
+                    closeCoinModal();
+                }
+            });
+
+            document.addEventListener("keydown", (event) => {
+                if (event.key === "Escape") {
+                    closeCoinModal();
+                }
+            });
+
+            coinPacks.forEach((pack) => {
+                pack.addEventListener("click", () => {
+                    coinPacks.forEach((item) =>
+                        item.classList.remove("active"),
+                    );
+                    pack.classList.add("active");
+                });
+            });
+
+            waitlistForm.addEventListener("submit", async (event) => {
+                event.preventDefault();
+                const email = waitlistEmail.value.trim();
+                if (!email) {
+                    return;
+                }
+
+                waitlistButton.disabled = true;
+                waitlistStatus.textContent = "Joining...";
+                waitlistStatus.className = "status";
+
+                try {
+                    const response = await fetch("/api/waitlist", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            email,
+                            name: waitlistName.value.trim(),
+                            source: "landing-simple-colorful-elegant",
+                        }),
+                    });
+
+                    const data = await response.json();
+                    if (!response.ok) {
+                        throw new Error(data?.detail || "Could not join now.");
+                    }
+
+                    waitlistStatus.textContent =
+                        data.message || "You are on the list.";
+                    waitlistStatus.className = "status success";
+                    waitlistEmail.value = "";
+                } catch (error) {
+                    waitlistStatus.textContent =
+                        error.message || "Could not join right now.";
+                    waitlistStatus.className = "status error";
+                } finally {
+                    waitlistButton.disabled = false;
+                }
+            });
+        </script>
+    </body>
+</html>

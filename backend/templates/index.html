@@ -85,9 +85,13 @@
             }
 
             .landing-logo {
+                color: #201a2f;
                 font-family: "Playfair Display", Georgia, serif;
-                font-size: 4rem;
-                font-weight: 600;
+                font-size: clamp(2.4rem, 9vw, 6rem);
+                line-height: 0.96;
+                margin-bottom: 0.25rem;
+                text-align: left;
+
                 background: var(--gradient);
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
@@ -985,17 +989,20 @@
             // Auto-detect API URL for deployment
             const getApiUrl = () => {
                 // Check if running on localhost
-                if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-                    return 'http://localhost:8000';
+                if (
+                    window.location.hostname === "localhost" ||
+                    window.location.hostname === "127.0.0.1"
+                ) {
+                    return "http://localhost:8000";
                 }
                 // For deployed version, use same host
                 return window.location.origin;
             };
             const API_URL = getApiUrl();
-            const WS_URL = API_URL.replace('http', 'ws');
+            const WS_URL = API_URL.replace("http", "ws");
 
             createApp({
-                delimiters: ['[[', ']]'],
+                delimiters: ["[[", "]]"],
                 setup() {
                     // State
                     const userName = ref("");
@@ -1019,7 +1026,7 @@
                             icon: "💒",
                             question_count: 5,
                         },
-                        family: {
+                        /* family: {
                             title: "Family",
                             icon: "👨‍👩‍👧‍👦",
                             question_count: 4,
@@ -1053,7 +1060,7 @@
                             title: "Legacy",
                             icon: "✨",
                             question_count: 4,
-                        },
+                        }, */
                     });
 
                     // WebSocket
@@ -1141,9 +1148,7 @@
                     };
 
                     const connectWebSocket = (sessionId) => {
-                        ws = new WebSocket(
-                            `${WS_URL}/ws/${sessionId}`,
-                        );
+                        ws = new WebSocket(`${WS_URL}/ws/${sessionId}`);
 
                         ws.onmessage = (event) => {
                             const data = JSON.parse(event.data);
